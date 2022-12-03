@@ -13,6 +13,6 @@ public class Auth {
      * @return {@code true} - dane logowania są poprawne, {@code false} - dane logowania są błędne
      */
     public static boolean isCorrectUser(String login, String password) {
-        return true; // TODO MK: Implementacja w ramach TSK-1
+        return false; // TODO MK: Implementacja w ramach TSK-1
     }
 }
