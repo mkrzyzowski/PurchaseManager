@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javakurs.purchasemanager.controller.FrmMainController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#424a51" height="813.0" stroke="#424a51" strokeType="INSIDE" width="1276.0" />
+      <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/tlo/tlo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="800.0" fitWidth="1282.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/tlo/tloZdjecie.jpg" />
+         </image>
+      </ImageView>
       <MenuBar prefHeight="25.0" prefWidth="1200.0">
         <menus>
-          <Menu mnemonicParsing="false" text="Plk">
+          <Menu mnemonicParsing="false" text="Plik">
             <items>
               <MenuItem mnemonicParsing="false" text="Zamknij" />
             </items>
@@ -31,5 +46,46 @@
           </Menu>
         </menus>
       </MenuBar>
+      <Label layoutX="746.0" layoutY="52.0" prefHeight="90.0" prefWidth="409.0" text="W tym miesiącu wydałeś:" textFill="#16144f" wrapText="true">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <Label layoutX="746.0" layoutY="47.0" prefHeight="33.0" prefWidth="322.0" text="Dzisiaj wydałeś:" textFill="#16144f">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <Label layoutX="746.0" layoutY="106.0" prefHeight="39.0" prefWidth="355.0" text="W tym roku wydałeś:" textFill="#16144f">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#313c46" height="83.0" layoutX="709.0" layoutY="671.0" stroke="BLACK" strokeType="INSIDE" width="218.0">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Rectangle>
+      <Label alignment="CENTER" layoutX="760.0" layoutY="691.0" prefHeight="39.0" prefWidth="117.0" text="Wyloguj" textFill="WHITE">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnLogOut" layoutX="709.0" layoutY="671.0" mnemonicParsing="false" onAction="#btnLogOutClicked" opacity="0.0" prefHeight="83.0" prefWidth="218.0" text="Button">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#313c46" height="83.0" layoutX="937.0" layoutY="671.0" stroke="BLACK" strokeType="INSIDE" width="218.0" />
+      <Label alignment="CENTER" layoutX="988.0" layoutY="691.0" prefHeight="39.0" prefWidth="117.0" text="Wyjdź" textFill="WHITE">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Button layoutX="937.0" layoutY="671.0" mnemonicParsing="false" onAction="#btnLeaveClicked" opacity="0.0" prefHeight="83.0" prefWidth="218.0" text="Button">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </Pane>
