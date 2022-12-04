@@ -6,13 +6,14 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javakurs.purchasemanager.controller.FrmMainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javakurs.purchasemanager.controller.FrmMainController">
    <children>
       <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -28,20 +29,44 @@
         <menus>
           <Menu mnemonicParsing="false" text="Plik">
             <items>
+                  <Menu mnemonicParsing="false" text="Użytkownicy">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Lista użytkowników" />
+                        <MenuItem mnemonicParsing="false" text="Dodaj użytkownika" />
+                        <MenuItem mnemonicParsing="false" text="Usuń użytkownika" />
+                    </items>
+                  </Menu>
+                  <MenuItem mnemonicParsing="false" text="Ustawienia" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem mnemonicParsing="false" text="Zamknij" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Produkty">
             <items>
-              <MenuItem mnemonicParsing="false" text="Dodaj" />
-                  <MenuItem mnemonicParsing="false" text="Usuń" />
+                  <Menu mnemonicParsing="false" text="Kategorie">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Lista kategorii" />
+                        <MenuItem mnemonicParsing="false" text="Dodaj kategorię" />
+                        <MenuItem mnemonicParsing="false" text="Statystyki" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Typy produktów">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Lista typów produktów" />
+                        <MenuItem mnemonicParsing="false" text="Dodaj typ produktu" />
+                    </items>
+                  </Menu>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+              <MenuItem mnemonicParsing="false" text="Lista produktów" />
+                  <MenuItem mnemonicParsing="false" text="Dodaj produkt" />
+                  <MenuItem mnemonicParsing="false" text="Statystyki" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Zakupy">
             <items>
-              <MenuItem mnemonicParsing="false" text="Lista" />
-                  <MenuItem mnemonicParsing="false" text="Dodaj" />
-                  <MenuItem mnemonicParsing="false" text="Usuń" />
+              <MenuItem mnemonicParsing="false" text="Moje zakupy" />
+                  <MenuItem mnemonicParsing="false" text="Dodaj zakupy" />
+                  <MenuItem mnemonicParsing="false" text="Statystyki" />
             </items>
           </Menu>
         </menus>
