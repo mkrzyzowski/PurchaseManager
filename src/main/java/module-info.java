@@ -4,6 +4,7 @@ module com.javakurs.purchasemanager {
     requires javafx.web;
 
     requires org.controlsfx.controls;
+    requires java.sql;
 
     opens com.javakurs.purchasemanager to javafx.fxml;
     exports com.javakurs.purchasemanager;
