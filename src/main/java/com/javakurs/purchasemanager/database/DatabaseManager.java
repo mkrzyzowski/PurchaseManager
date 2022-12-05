@@ -10,7 +10,6 @@ import javafx.util.Pair;
 import java.lang.reflect.Field;
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -33,19 +32,57 @@ public class DatabaseManager {
     private static final String password = PropertiesHelper.getProperty("database.password");
 
     /**
-     * Znajduje jeden rekord w tabeli spełniający określone warunki.
+     * Ładuje obiekt danej klasy na podstawie identyfikatora.
+     *
+     * @param clazz klasa, której obiekt ma zostać pobrany
+     * @param recordId identyfikator rekordu do pobrania
+     * @return obiekt pobrany z bazy danych lub {@code null}, gdy wystąpił błąd pobierania danych
+     */
+    public static <T extends BaseEntity> T getById(Class<? extends BaseEntity> clazz, Integer recordId) {
+        List<Pair<String, Object>> params = new ArrayList<>();
+        params.add(new Pair<>("id", recordId));
+
+        return getOne(clazz, params);
+    }
+
+    /**
+     * Ładuje wszystkie obiekty danej klasy na podstawie identyfikatora.
+     *
+     * @param clazz klasa, której wszystkie obiekty mają zostać pobrane
+     * @return lista wszystkich obiektów pobranych z bazy danych lub {@code null}, gdy wystąpił błąd pobierania danych
+     */
+    public static <T extends BaseEntity> List<T> getAll(Class<? extends BaseEntity> clazz) {
+        return getList(clazz, null);
+    }
+
+    /**
+     * Ładuje wszystkie obiekty danej klasy na podstawie identyfikatora użytkownika, który wprowadził dane.
+     *
+     * @param clazz klasa, której wszystkie obiekty mają zostać pobrane
+     * @param insertUserId identyfikator użytkownika, który wprowadził dane
+     * @return lista wszystkich obiektów pobranych z bazy danych lub {@code null}, gdy wystąpił błąd pobierania danych
+     */
+    public static <T extends BaseEntity> List<T> getAllByInsertUserId(Class<? extends BaseEntity> clazz, Integer insertUserId) {
+        List<Pair<String, Object>> params = new ArrayList<>();
+        params.add(new Pair<>("insertUserId", insertUserId));
+
+        return getList(clazz, params);
+    }
+
+    /**
+     * Znajduje jeden obiekt danej klasy spełniający określone warunki.
      *
      * @param clazz  nazwa klasy reprezentującej encję (nazwa klasy = nazwa tabeli, pola klasy = kolumny tabeli)
      * @param params parametry tworzące warunek filtrujący dane (pary: kolumna, wartość)
      * @param <T>    typ klasy reprezentującej encję
      * @return obiekt utworzony na podstawie danych pobranych z tabeli lub {@code null}, jeśli nie znaleziono rekordu
      */
-    public static <T extends BaseEntity> T findOne(Class<? extends BaseEntity> clazz, List<Pair<String, Object>> params) {
-        return findOne(clazz, params, new Query());
+    public static <T extends BaseEntity> T getOne(Class<? extends BaseEntity> clazz, List<Pair<String, Object>> params) {
+        return getOne(clazz, params, new Query());
     }
 
     /**
-     * Znajduje jeden rekord spełniający określone warunki.
+     * Znajduje jeden obiekt danej klasy spełniający określone warunki.
      *
      * @param clazz  nazwa klasy reprezentującej encję (nazwa klasy = nazwa tabeli, pola klasy = kolumny tabeli)
      * @param params parametry tworzące warunek filtrujący dane (pary: kolumna, wartość)
@@ -53,7 +90,7 @@ public class DatabaseManager {
      * @param <T>    typ klasy reprezentującej encję
      * @return obiekt utworzony na podstawie danych pobranych z tabeli lub {@code null}, jeśli nie znaleziono rekordu
      */
-    public static <T extends BaseEntity> T findOne(Class<? extends BaseEntity> clazz, List<Pair<String, Object>> params, Query query) {
+    public static <T extends BaseEntity> T getOne(Class<? extends BaseEntity> clazz, List<Pair<String, Object>> params, Query query) {
         try {
             openConnection();
 
@@ -74,15 +111,15 @@ public class DatabaseManager {
     }
 
     /**
-     * Znajduje listę rekordów spełniających określone warunki.
+     * Znajduje listę obiektów danej klasy spełniających określone warunki.
      *
      * @param clazz  nazwa klasy reprezentującej encję (nazwa klasy = nazwa tabeli, pola klasy = kolumny tabeli)
      * @param params parametry tworzące warunek filtrujący dane (pary: kolumna, wartość)
      * @param <T>    typ klasy reprezentującej encję
      * @return lista obiektów utworzonych na podstawie danych pobranych z tabeli lub {@code null}, gdy wystąpił błąd pobierania danych
      */
-    public static <T extends BaseEntity> List<T> findList(Class<? extends BaseEntity> clazz, List<Pair<String, Object>> params) {
-        return findList(clazz, params, new Query());
+    public static <T extends BaseEntity> List<T> getList(Class<? extends BaseEntity> clazz, List<Pair<String, Object>> params) {
+        return getList(clazz, params, new Query());
     }
 
     /**
@@ -94,7 +131,7 @@ public class DatabaseManager {
      * @param <T>    typ klasy reprezentującej encję
      * @return lista obiektów utworzonych na podstawie danych pobranych z tabeli lub {@code null}, gdy wystąpił błąd pobierania danych
      */
-    public static <T extends BaseEntity> List<T> findList(Class<? extends BaseEntity> clazz, List<Pair<String, Object>> params, Query query) {
+    public static <T extends BaseEntity> List<T> getList(Class<? extends BaseEntity> clazz, List<Pair<String, Object>> params, Query query) {
         try {
             openConnection();
 
@@ -130,7 +167,7 @@ public class DatabaseManager {
 
             Query query = new Query();
             query.setSqlOrderBy("id DESC");
-            T insertedEntity = findOne(entity.getClass(), null, query);
+            T insertedEntity = getOne(entity.getClass(), null, query);
             if (insertedEntity == null)
                 return null;
 
@@ -165,7 +202,7 @@ public class DatabaseManager {
 
             List<Pair<String, Object>> params = new ArrayList<>();
             params.add(new Pair<>("id", entity.getId()));
-            T modifiedEntity = findOne(entity.getClass(), params);
+            T modifiedEntity = getOne(entity.getClass(), params);
             entity.setModifyDate(modifiedEntity.getModifyDate());
             entity.setModifyUserId(modifiedEntity.getModifyUserId());
 

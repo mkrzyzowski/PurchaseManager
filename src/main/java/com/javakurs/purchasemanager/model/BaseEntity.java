@@ -60,44 +60,6 @@ public abstract class BaseEntity {
     }
 
     /**
-     * Ładuje obiekt na podstawie identyfikatora.
-     *
-     * @param clazz klasa, której obiekt ma zostać pobrany
-     * @param recordId identyfikator rekordu do pobrania
-     * @return obiekt pobrany z bazy danych lub {@code null}, gdy wystąpił błąd pobierania danych
-     */
-    public static <T extends BaseEntity> T loadById(Class<? extends BaseEntity> clazz, Integer recordId) {
-        List<Pair<String, Object>> params = new ArrayList<>();
-        params.add(new Pair<>("id", recordId));
-
-        return DatabaseManager.findOne(clazz, params);
-    }
-
-    /**
-     * Ładuje wszystkie obiekty danej klasy na podstawie identyfikatora.
-     *
-     * @param clazz klasa, której wszystkie obiekty mają zostać pobrane
-     * @return lista wszystkich obiektów pobranych z bazy danych lub {@code null}, gdy wystąpił błąd pobierania danych
-     */
-    public static <T extends BaseEntity> List<T> loadAll(Class<? extends BaseEntity> clazz) {
-        return DatabaseManager.findList(clazz, null);
-    }
-
-    /**
-     * Ładuje wszystkie obiekty danej klasy na podstawie identyfikatora użytkownika, który wprowadził dane.
-     *
-     * @param clazz klasa, której wszystkie obiekty mają zostać pobrane
-     * @param insertUserId identyfikator użytkownika, który wprowadził dane
-     * @return lista wszystkich obiektów pobranych z bazy danych lub {@code null}, gdy wystąpił błąd pobierania danych
-     */
-    public static <T extends BaseEntity> List<T> loadAllByInsertUserId(Class<? extends BaseEntity> clazz, Integer insertUserId) {
-        List<Pair<String, Object>> params = new ArrayList<>();
-        params.add(new Pair<>("insertUserId", insertUserId));
-
-        return DatabaseManager.findList(clazz, params);
-    }
-
-    /**
      * Dodaje nowy obiekt do bazy danych.
      *
      * @return identyfikator utworzonego rekordu lub {@code null} w przypadku błędu tworzenia rekordu
@@ -117,6 +79,11 @@ public abstract class BaseEntity {
      * @return {@code true} - operacja zakończona powodzeniem, {@code false} - wystąpił błąd modyfikacji obiektu
      */
     public boolean modify() {
+        if (id == null) {
+            MsgHelper.showError("Rekord nie istnieje w bazie danych", "Nastąpiła próba usunięcia rekordu, który nie istnieje w bazie danych");
+            return false;
+        }
+
         return DatabaseManager.modifyRecord(this);
     }
 
@@ -126,6 +93,11 @@ public abstract class BaseEntity {
      * @return {@code true} - operacja zakończona powodzeniem, {@code false} - wystąpił błąd usuwania obiektu
      */
     public boolean delete() {
+        if (id == null) {
+            MsgHelper.showError("Rekord nie istnieje w bazie danych", "Nastąpiła próba usunięcia rekordu, który nie istnieje w bazie danych");
+            return false;
+        }
+
         List<Pair<String, Object>> params = new ArrayList<>();
         params.add(new Pair<>("id", id));
 

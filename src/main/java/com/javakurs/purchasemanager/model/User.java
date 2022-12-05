@@ -68,6 +68,6 @@ public class User extends BaseEntity {
         params.add(new Pair<>("login", login));
         params.add(new Pair<>("password", password));
         params.add(new Pair<>("isActive", true));
-        return DatabaseManager.findOne(User.class, params);
+        return DatabaseManager.getOne(User.class, params);
     }
 }
