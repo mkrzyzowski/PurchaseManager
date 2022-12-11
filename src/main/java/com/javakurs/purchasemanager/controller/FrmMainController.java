@@ -18,5 +18,4 @@ public class FrmMainController {
     public void btnLeaveClicked(ActionEvent actionEvent) {
         ((Stage) btnLogOut.getScene().getWindow()).close();
     }
-
 }
