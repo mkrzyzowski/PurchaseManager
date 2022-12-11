@@ -38,7 +38,7 @@
                   </Menu>
                   <MenuItem mnemonicParsing="false" text="Ustawienia" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" text="Zamknij" />
+              <MenuItem mnemonicParsing="false" onAction="#menItemCloseClicked" text="Zamknij" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Produkty">

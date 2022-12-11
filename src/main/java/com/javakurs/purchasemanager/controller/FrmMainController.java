@@ -12,10 +12,14 @@ public class FrmMainController {
 
     public void btnLogOutClicked(ActionEvent actionEvent) {
         WindowHelper.openWindow(WindowType.FRM_LOGIN);
-        ((Stage) btnLogOut.getScene().getWindow()).close();
+        WindowHelper.closeWindow(btnLogOut);
     }
 
     public void btnLeaveClicked(ActionEvent actionEvent) {
-        ((Stage) btnLogOut.getScene().getWindow()).close();
+        WindowHelper.closeWindow(btnLogOut);
+    }
+
+    public void menItemCloseClicked(ActionEvent actionEvent) {
+        WindowHelper.closeWindow(btnLogOut);
     }
 }
