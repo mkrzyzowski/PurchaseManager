@@ -25,6 +25,7 @@ public class WindowHelper {
             stage.setScene(scene);
             stage.show();
         } catch (Exception ex) {
+            ex.printStackTrace();
             MsgHelper.showError(String.format("Błąd otwierania ekranu %s", windowType.getViewPath()), ex.getLocalizedMessage());
         }
     }
