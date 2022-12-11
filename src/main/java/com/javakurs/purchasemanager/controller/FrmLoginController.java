@@ -13,9 +13,8 @@ import javafx.stage.Stage;
 
 public class FrmLoginController {
     private int incorrectLoginCount = 0;
-    private PasswordField txtPassword;
-
-    private TextField txtUser;
+    public PasswordField txtPassword;
+    public TextField txtUser;
 
     /**
      * Metoda sprawdza czy dane logowania są poprawne, jeśli sa to przechodzi do ekranu głównego, jeśli nie to wyświetla
@@ -26,8 +25,9 @@ public class FrmLoginController {
         String login = txtUser.getText();
 
         do {
-            if (Auth.isCorrectUser(login, password)) {
+            if (Auth.isCorrectUser(login, password) == true) {
                 WindowHelper.openWindow(WindowType.FRM_MAIN);
+                break;
             } else {
                 MsgHelper.showError("Złe informacje", "Podaj poprawne dane logowania");
                 incorrectLoginCount++;
