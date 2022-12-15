@@ -24,17 +24,15 @@ public class FrmLoginController {
         String password = txtPassword.getText();
         String login = txtUser.getText();
 
-        do {
-            if (Auth.isCorrectUser(login, password) == true) {
-                WindowHelper.openWindow(WindowType.FRM_MAIN);
-                break;
-            } else {
-                MsgHelper.showError("Złe informacje", "Podaj poprawne dane logowania");
-                incorrectLoginCount++;
-            }
-        } while (incorrectLoginCount < 3);
 
-        ((Stage) txtPassword.getScene().getWindow()).close();
+        if (incorrectLoginCount >= 3) {
+            ((Stage) txtPassword.getScene().getWindow()).close();
+        } else if (Auth.isCorrectUser(login, password) == true) {
+            WindowHelper.openWindow(WindowType.FRM_MAIN);
+        } else {
+            MsgHelper.showError("Złe informacje", "Podaj poprawne dane logowania");
+            incorrectLoginCount++;
+        }
     }
 
     /**
