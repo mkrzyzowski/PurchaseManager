@@ -18,7 +18,7 @@ public class MainApplication extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        WindowHelper.openWindow(WindowType.FRM_LOGIN);
+        WindowHelper.openWindow(WindowType.FRM_MAIN);
     }
 
     /**
