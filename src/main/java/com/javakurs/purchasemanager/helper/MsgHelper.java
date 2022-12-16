@@ -62,8 +62,5 @@ public class MsgHelper {
             WindowHelper.closeWindow(node);
 
         }
-        else {
-
-        }
     }
 }
